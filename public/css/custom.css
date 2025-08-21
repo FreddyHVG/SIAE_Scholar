@@ -1,0 +1,414 @@
+
+/*CSS HEADER */
+
+.custom-header {
+    width: 100vw;
+    background-color: #f5f5f5;
+    padding: 20px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header-content {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header-left, .header-right {
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.header-left img {
+    width: 100px; /* Ajusta el tamaño del logo */
+    margin-right: 20px;
+}
+
+.header-text h1 {
+    font-size: 24px;
+    font-weight: bold;
+    color: #004085; /* Cambia el color si es necesario */
+}
+
+.header-text p {
+    margin-top: -10px;
+    color: #004085; /* Ajusta el color */
+}
+
+.contact-info p {
+    margin: 0;
+    font-size: 18px;
+}
+
+.social-icons {
+    display: flex;
+    justify-content: center; /* Centrar los íconos */
+    width: 80%; /* Asegurar que ocupe el ancho completo */
+}
+
+.social-icons a {
+    font-size: 20px;
+    margin-right: 10px;
+    color: white;
+}
+
+.social-icons a:hover {
+    color: #d7d58a; /* Color de hover */
+}
+
+/* Estilo para el menú de hamburguesa */
+.main-header.navbar {
+    width: 100%;
+    background-color: #274a6e;
+}
+
+.navbar-nav .nav-link {
+    color: #d7d58a;
+}
+
+.navbar-nav .nav-link .fas.fa-bars {
+    color: white; /* Cambia el color del ícono */
+}
+
+.navbar-nav .nav-link .fas.fa-bars:hover {
+    color: #677e86; /* O cualquier tono de amarillo al pasar el mouse */
+}
+
+/* Media Queries para pantallas móviles */
+@media (max-width: 768px) {
+    .custom-header {
+        flex-direction: column; /* Hacer que el logo y el texto se apilen en columnas */
+        text-align: center; /* Centrar el contenido */
+        padding: 10px; /* Reducir el padding */
+    }
+
+    .header-content {
+        flex-direction: column; /* Disposición en columna */
+        align-items: center; /* Centrar los elementos */
+    }
+
+    .header-left {
+        margin-bottom: 15px; /* Espacio entre el logo y el texto */
+    }
+
+    .header-left img {
+        width: 80px; /* Reducir el tamaño del logo en móvil */
+        margin-right: 0;
+    }
+
+    .header-text h1 {
+        font-size: 20px; /* Reducir el tamaño del título en móvil */
+    }
+
+    .header-text p {
+        font-size: 14px; /* Reducir el tamaño del subtítulo en móvil */
+        margin-top: 0;
+    }
+
+    /* Ocultar dirección y teléfono en pantallas pequeñas */
+    .header-right .contact-info {
+        display: none;
+    }
+
+    /* Centrar los iconos de redes sociales en móvil */
+    .social-icons {
+        justify-content: center;
+        margin-top: 10px;
+    }
+
+    .social-icons a {
+        font-size: 18px; /* Ajustar tamaño de los íconos */
+        margin-right: 8px;
+    }
+
+    /* Ajustar el menú de hamburguesa a la izquierda */
+    .main-header.navbar {
+        justify-content: flex-start; /* Mantener el icono de menú a la izquierda */
+    }
+}
+
+
+
+
+/* CSS men+u lado izquierdo*/
+
+/* Botones principales (nivel superior) */
+.sidebar-dark-primary .nav-sidebar .nav-item > .nav-link.active {
+    background-color: #274a6e !important;  /* Azul oscuro para los botones principales */
+    color: white !important;  /* Texto en blanco */
+}
+
+/* Subbotones (desplegables) */
+.sidebar-dark-primary .nav-sidebar .nav-treeview > .nav-item > .nav-link {
+    background-color: #677e86 !important;  /* gris para los subbotones */
+    color: white !important;  /* Texto en blanco */
+}
+
+/* Hover en los botones principales */
+.sidebar-dark-primary .nav-sidebar .nav-item > .nav-link.active:hover {
+    background-color: #145699 !important;  /* color al pasar el mouse */
+    color: #fff !important;  /* Color texto al pasar el mouse */
+}
+
+/* Hover en los subbotones */
+.sidebar-dark-primary .nav-sidebar .nav-treeview > .nav-item > .nav-link:hover {
+    background-color: #899aa1 !important;  
+    color: #FFF !important;  
+}
+
+
+/* Iconos en los botones principales */
+.sidebar-dark-primary .nav-sidebar .nav-item > .nav-link.active .nav-icon {
+    color: white !important;  /* Iconos en blanco */
+}
+
+/* Iconos en los subbotones */
+.sidebar-dark-primary .nav-sidebar .nav-treeview > .nav-item > .nav-link .nav-icon {
+    color: white !important;  /* Iconos en blanco */
+}
+
+
+
+
+
+/* Colores cuadros página principal*/
+
+/* Ajustar el tamaño de los iconos un 15% menos */
+.small-box .icon i {
+    font-size: 150% !important; /* Reducir tamaño del icono un 15% */
+}
+
+/* Para todos los boxes que usan el azul */
+.small-box.bg-primary {
+    background-color: #194e83 !important;
+    color: white !important;
+}
+
+.small-box.bg-primary .inner,
+.small-box.bg-primary .icon,
+.small-box.bg-primary a {
+    color: white !important;
+}
+
+/* Para el box de color amarillo (con texto e iconos negros) */
+.small-box.bg-warning {
+    background-color: #d7d58a !important;
+    color: black !important;
+}
+
+.small-box.bg-warning .inner,
+.small-box.bg-warning .icon,
+.small-box.bg-warning a {
+    color: black !important;
+}
+
+/* Para el box de color blanco (con texto e iconos negros) */
+.small-box.bg-default {
+    background-color: white !important;
+    color: black !important;
+}
+
+.small-box.bg-default .inner,
+.small-box.bg-default .icon,
+.small-box.bg-default a {
+    color: black !important;
+}
+
+/* Para el box de color navy blue */
+.small-box.bg-danger {
+    background-color: #274a6e !important;
+    color: white !important;
+}
+
+.small-box.bg-danger .inner,
+.small-box.bg-danger .icon,
+.small-box.bg-danger a {
+    color: white !important;
+}
+
+/* Para el box de color dark blue */
+.small-box.bg-success {
+    background-color: #677e86 !important;
+    color: white !important;
+}
+
+.small-box.bg-success .inner,
+.small-box.bg-success .icon,
+.small-box.bg-success a {
+    color: white !important;
+}
+
+/* Para el box de color gray-blue */
+.small-box.bg-dark {
+    background-color: #274a6e !important;
+    color: white !important;
+}
+
+.small-box.bg-dark .inner,
+.small-box.bg-dark .icon,
+.small-box.bg-dark a {
+    color: white !important;
+}
+
+
+/* Cambiar color turquesa por amarillo en el box "Usuarios registrados" */
+.small-box.bg-info {
+    background-color: #d7d58a !important; /* Cambiar al amarillo deseado */
+    color: black !important; /* Texto e iconos en negro */
+}
+
+.small-box.bg-info .inner,
+.small-box.bg-info .icon,
+.small-box.bg-info a {
+    color: black !important; /* Asegurar que todo el texto y los iconos sean negros */
+}
+
+
+/* BOTONES */
+
+.btn-info {
+  color: #fff;
+  background-color: #274A6e;
+  border-color: #274A6e;
+  box-shadow: none;
+}
+
+.btn-info:hover {
+  color: #fff;
+  background-color: #145699;
+  border-color: #145699;
+}
+
+.btn-info2 {
+  color: #000000;
+  background-color: #d7d58a;
+  border-color: #d7d58a;
+  box-shadow: none;
+}
+
+.btn-info2:hover {
+  color: #000000;
+  background-color: #edea85;
+  border-color: #edea85;
+}
+
+.btn-info3 {
+  color: #fff;
+  background-color: #677e86;
+  border-color: #677e86;
+  box-shadow: none;
+}
+
+.btn-info3:hover {
+  color: #fff;
+  background-color: #899aa1;
+  border-color: #899aa1;
+}
+
+.btn-secondary {
+  color: #fff;
+  background-color: #274A6e;
+  border-color: #fff;
+  box-shadow: none;
+}
+
+.btn-secondary:hover {
+  color: #fff;
+  background-color: #145699;
+  border-color: #145699;
+}
+
+
+
+/*Encabezado de tablas*/
+.card-primary.card-outline {
+    border-color: #274a6e;  /* Cambia #1c6fac por el color que prefieras */
+}
+
+.card-title {
+    float: left;
+    font-size: 1.6rem;
+    font-weight: 400;
+    margin: 0;
+}
+
+
+/* Botón de tablas al pie, que indican el número de hojas o vistas*/
+
+.page-item.active .page-link {
+    z-index: 3;
+    color: #000000;
+    background-color: #d7d58a;
+    border-color: #d7d58a;
+}
+
+
+/* para el visor de columnas */
+
+.dropdown-item {
+    color: #000000;
+    background-color: #fff;
+    border-bottom: 1px solid #000000; /* Añade una línea blanca entre los elementos */
+}
+
+.dropdown-item:last-child {
+    border-bottom: none; /* Elimina la línea del último elemento */
+}
+
+.dropdown-item.active, .dropdown-item:active {
+    color: #ffffff;
+    background-color: #274a6e; /* Cambia el color del fondo para el elemento activo */
+    border-bottom: 1px solid #fff; /* Añade una línea blanca entre los elementos */
+}
+
+/* Tamaño de letra de los formularios*/
+.form-control {
+    display: block;
+    width: 100%;
+    height: calc(2.25rem + 2px);
+    padding: .375rem .75rem;
+    font-size: 0.8rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #aeafb0;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+    box-shadow: inset 0 0 0 transparent;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+
+.form-control:focus {
+  color: #495057;
+  background-color: #fff;
+  border-color: #274A6e;
+  outline: 0;
+  box-shadow: inset 0 0 0 rgba(0, 0, 0, 0);
+}
+
+/* Cambiar el color de fondo de las opciones */
+select.form-control {
+    background-color: #fff; /* Fondo cuando está cerrado */
+    color: #495057;
+}
+
+select.form-control:focus {
+    background-color: #fff; /* Fondo cuando está enfocado */
+    border-color: #274A6e;
+    color: #495057;
+    outline: none;
+}
+
+/* Estilos para las opciones al abrir el desplegable (solo funciona en algunos navegadores) */
+select.form-control option {
+    background-color: #fff; /* Fondo para las opciones */
+    color: #495057;  /* Color del texto */
+}
+

@@ -1,0 +1,27 @@
+# SO/IDE
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Entorno / secretos
+.env
+*.env
+app/config.php
+config.php
+
+# Dependencias / compilados
+vendor/
+node_modules/
+composer.lock
+package-lock.json
+
+# Cachés / logs
+storage/
+cache/
+tmp/
+*.log
+
+# Subidas
+public/uploads/
+uploads/
