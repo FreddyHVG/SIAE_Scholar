@@ -32,12 +32,12 @@
 .header-text h1 {
     font-size: 24px;
     font-weight: bold;
-    color: #004085; /* Cambia el color si es necesario */
+    color: #21558f; /* Cambia el color si es necesario */
 }
 
 .header-text p {
     margin-top: -10px;
-    color: #004085; /* Ajusta el color */
+    color: #21558f; /* Ajusta el color */
 }
 
 .contact-info p {
@@ -58,17 +58,17 @@
 }
 
 .social-icons a:hover {
-    color: #d7d58a; /* Color de hover */
+    color: #f1e899; /* Color de hover */
 }
 
 /* Estilo para el menú de hamburguesa */
 .main-header.navbar {
     width: 100%;
-    background-color: #274a6e;
+    background-color: #2f4b70;
 }
 
 .navbar-nav .nav-link {
-    color: #d7d58a;
+    color: #f1e899;
 }
 
 .navbar-nav .nav-link .fas.fa-bars {
@@ -76,7 +76,7 @@
 }
 
 .navbar-nav .nav-link .fas.fa-bars:hover {
-    color: #677e86; /* O cualquier tono de amarillo al pasar el mouse */
+    color: #808186; /* O cualquier tono de amarillo al pasar el mouse */
 }
 
 /* Media Queries para pantallas móviles */
@@ -139,19 +139,19 @@
 
 /* Botones principales (nivel superior) */
 .sidebar-dark-primary .nav-sidebar .nav-item > .nav-link.active {
-    background-color: #274a6e !important;  /* Azul oscuro para los botones principales */
+    background-color: #2f4b70 !important;  /* Azul oscuro para los botones principales */
     color: white !important;  /* Texto en blanco */
 }
 
 /* Subbotones (desplegables) */
 .sidebar-dark-primary .nav-sidebar .nav-treeview > .nav-item > .nav-link {
-    background-color: #677e86 !important;  /* gris para los subbotones */
+    background-color: #808186 !important;  /* gris para los subbotones */
     color: white !important;  /* Texto en blanco */
 }
 
 /* Hover en los botones principales */
 .sidebar-dark-primary .nav-sidebar .nav-item > .nav-link.active:hover {
-    background-color: #145699 !important;  /* color al pasar el mouse */
+    background-color: #21558f !important;  /* color al pasar el mouse */
     color: #fff !important;  /* Color texto al pasar el mouse */
 }
 
@@ -185,7 +185,7 @@
 
 /* Para todos los boxes que usan el azul */
 .small-box.bg-primary {
-    background-color: #194e83 !important;
+    background-color: #2f4b70 !important;
     color: white !important;
 }
 
@@ -197,7 +197,7 @@
 
 /* Para el box de color amarillo (con texto e iconos negros) */
 .small-box.bg-warning {
-    background-color: #d7d58a !important;
+    background-color: #f1e899 !important;
     color: black !important;
 }
 
@@ -221,7 +221,7 @@
 
 /* Para el box de color navy blue */
 .small-box.bg-danger {
-    background-color: #274a6e !important;
+    background-color: #21558f !important;
     color: white !important;
 }
 
@@ -233,7 +233,7 @@
 
 /* Para el box de color dark blue */
 .small-box.bg-success {
-    background-color: #677e86 !important;
+    background-color: #808186 !important;
     color: white !important;
 }
 
@@ -245,7 +245,7 @@
 
 /* Para el box de color gray-blue */
 .small-box.bg-dark {
-    background-color: #274a6e !important;
+    background-color: #2f4b70 !important;
     color: white !important;
 }
 
@@ -258,7 +258,7 @@
 
 /* Cambiar color turquesa por amarillo en el box "Usuarios registrados" */
 .small-box.bg-info {
-    background-color: #d7d58a !important; /* Cambiar al amarillo deseado */
+    background-color: #f1e899 !important; /* Cambiar al amarillo deseado */
     color: black !important; /* Texto e iconos en negro */
 }
 
@@ -273,46 +273,46 @@
 
 .btn-info {
   color: #fff;
-  background-color: #274A6e;
-  border-color: #274A6e;
+  background-color: #2f4b70;
+  border-color: #2f4b70;
   box-shadow: none;
 }
 
 .btn-info:hover {
   color: #fff;
-  background-color: #145699;
-  border-color: #145699;
+  background-color: #21558f;
+  border-color: #21558f;
 }
 
 .btn-info2 {
   color: #000000;
-  background-color: #d7d58a;
-  border-color: #d7d58a;
+  background-color: #f1e899;
+  border-color: #f1e899;
   box-shadow: none;
 }
 
 .btn-info2:hover {
   color: #000000;
-  background-color: #edea85;
-  border-color: #edea85;
+  background-color: #f1e899;
+  border-color: #f1e899;
 }
 
 .btn-info3 {
   color: #fff;
-  background-color: #677e86;
-  border-color: #677e86;
+  background-color: #808186;
+  border-color: #808186;
   box-shadow: none;
 }
 
 .btn-info3:hover {
   color: #fff;
-  background-color: #899aa1;
-  border-color: #899aa1;
+  background-color: #808186;
+  border-color: #808186;
 }
 
 .btn-secondary {
   color: #fff;
-  background-color: #274A6e;
+  background-color: #2f4b70;
   border-color: #fff;
   box-shadow: none;
 }
@@ -327,7 +327,7 @@
 
 /*Encabezado de tablas*/
 .card-primary.card-outline {
-    border-color: #274a6e;  /* Cambia #1c6fac por el color que prefieras */
+    border-color: #2f4b70;  /* Cambia #1c6fac por el color que prefieras */
 }
 
 .card-title {
@@ -343,8 +343,8 @@
 .page-item.active .page-link {
     z-index: 3;
     color: #000000;
-    background-color: #d7d58a;
-    border-color: #d7d58a;
+    background-color: #f1e899;
+    border-color: #f1e899;
 }
 
 
@@ -362,7 +362,7 @@
 
 .dropdown-item.active, .dropdown-item:active {
     color: #ffffff;
-    background-color: #274a6e; /* Cambia el color del fondo para el elemento activo */
+    background-color: #2f4b70; /* Cambia el color del fondo para el elemento activo */
     border-bottom: 1px solid #fff; /* Añade una línea blanca entre los elementos */
 }
 
@@ -388,7 +388,7 @@
 .form-control:focus {
   color: #495057;
   background-color: #fff;
-  border-color: #274A6e;
+  border-color: #2f4b70;
   outline: 0;
   box-shadow: inset 0 0 0 rgba(0, 0, 0, 0);
 }
@@ -401,7 +401,7 @@ select.form-control {
 
 select.form-control:focus {
     background-color: #fff; /* Fondo cuando está enfocado */
-    border-color: #274A6e;
+    border-color: #2f4b70;
     color: #495057;
     outline: none;
 }

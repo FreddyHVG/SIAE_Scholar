@@ -7,11 +7,12 @@ if (!isset($_SESSION['sesion_email'])) {
 
 $email_sesion = $_SESSION['sesion_email'];
 
-// Usuario + rol (LEFT JOIN para no romper si no hay registro en personas)
+/*  Usuario + rol (LEFT JOIN para no romper si falta ficha en personas)  */
 $query_sesion = $pdo->prepare("
-    SELECT usu.id_usuario, usu.email, usu.rol_id, usu.estado,
-           rol.nombre_rol,
-           per.nombres, per.apellidos, per.ci
+    SELECT
+        usu.id_usuario, usu.email, usu.rol_id, usu.estado,
+        rol.nombre_rol,
+        per.nombres, per.apellidos, per.ci
     FROM usuarios AS usu
     INNER JOIN roles    AS rol ON rol.id_rol = usu.rol_id
     LEFT  JOIN personas AS per ON per.usuario_id = usu.id_usuario
@@ -23,46 +24,62 @@ $u = $query_sesion->fetch(PDO::FETCH_ASSOC);
 
 if (!$u) { header('Location: ' . APP_URL . '/login'); exit; }
 
-$nombre_sesion_usuario    = $u['email'];
-$id_rol_sesion_usuario    = (int)$u['rol_id'];
-$rol_sesion_usuario       = $u['nombre_rol'] ?? '';
-$nombres_sesion_usuario   = $u['nombres'] ?? '';
-$apellidos_sesion_usuario = $u['apellidos'] ?? '';
-$ci_sesion_usuario        = $u['ci'] ?? '';
+$nombre_sesion_usuario     = $u['email'];
+$id_rol_sesion_usuario     = (int)$u['rol_id'];
+$rol_sesion_usuario        = $u['nombre_rol'] ?? '';
+$nombres_sesion_usuario    = $u['nombres'] ?? '';
+$apellidos_sesion_usuario  = $u['apellidos'] ?? '';
+$ci_sesion_usuario         = $u['ci'] ?? '';
 
-// ---- Normaliza la ruta solicitada: SIN querystring, SIN index.php, SIN .php ----
-$path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);          // /siaescholar/admin/materias/editar.php
-$base = rtrim(dirname($_SERVER['SCRIPT_NAME']), '/\\') . '/';       // /siaescholar/
-$rest = substr($path, strlen($base));                               // admin/materias/editar.php
-$rest = ltrim($rest, '/');                                          // admin/materias/editar.php
-$rest = preg_replace('#/index\.php$#i', '', $rest);                 // quita /index.php
-$rest = preg_replace('#\.php$#i', '', $rest);                       // quita .php
-$rest = rtrim($rest, '/');                                          // sin / final
-if ($rest === '') { $rest = 'admin'; }                              // raíz => admin
+/*  Construir la ruta EXACTA como está en la BD (con "/" inicial y con ".php")  */
+$path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);   // ej: /siaescholar/admin/materias/editar.php
+$base = rtrim(dirname($_SERVER['SCRIPT_NAME']), '/\\') . '/';// ej: /siaescholar/
+$rel  = substr($path, strlen($base));                        // ej: admin/materias/editar.php
+$rel  = ltrim($rel, '/');                                    // ej: admin/materias/editar.php
 
-// ---- Control de acceso: coincidencia EXACTA contra permisos del rol ----
-$perm_sql = $pdo->prepare("
-    SELECT per.url
-    FROM roles_permisos AS rp
-    INNER JOIN permisos AS per ON per.id_permiso = rp.permiso_id
-    WHERE rp.estado = '1' AND rp.rol_id = :rol
-");
-$perm_sql->execute([':rol' => $id_rol_sesion_usuario]);
-$permisos = $perm_sql->fetchAll(PDO::FETCH_COLUMN, 0);
-
-$autorizado = false;
-foreach ($permisos as $perm) {
-    $p = trim($perm, '/');
-    $p = preg_replace('#/index\.php$#i', '', $p);
-    $p = preg_replace('#\.php$#i', '', $p);
-    $p = rtrim($p, '/');
-    if ($p === '') { $p = 'admin'; }
-    if ($rest === $p) { $autorizado = true; break; }
+// Si quedó vacío, apunta al dashboard:
+if ($rel === '') {
+    $rel = 'admin/index.php';
+}
+// Si termina en "/", asumimos index.php
+if (substr($rel, -1) === '/') {
+    $rel .= 'index.php';
 }
 
-// (Opcional: convertir ADMIN en superusuario) Descomenta para autorizar todo al rol 1:
-// if ($rol_sesion_usuario === 'ADMINISTRADOR' || $id_rol_sesion_usuario === 1) { $autorizado = true; }
+// Ruta principal a comparar contra permisos.url (tal cual guardas en BD):
+$restPrincipal = '/' . $rel;                                 // ej: /admin/materias/editar.php
 
+// Alternativa: si el usuario entró sin extensión (p. ej. /admin/materias) probamos /admin/materias/index.php
+$alt = null;
+if (strpos($rel, '.php') === false) {
+    $alt = '/' . rtrim($rel, '/') . '/index.php';
+}
+
+/*  SUPERADMIN: autoriza todo si el rol es ADMINISTRADOR (id_rol = 1)  */
+$autorizado = false;
+if ($id_rol_sesion_usuario === 1 || $rol_sesion_usuario === 'ADMINISTRADOR') {
+    $autorizado = true;
+} else {
+    // Caso normal: verificar permisos exactos del rol
+    $perm_sql = $pdo->prepare("
+        SELECT per.url
+        FROM roles_permisos AS rp
+        INNER JOIN permisos AS per ON per.id_permiso = rp.permiso_id
+        WHERE rp.estado = '1' AND rp.rol_id = :rol
+    ");
+    $perm_sql->execute([':rol' => $id_rol_sesion_usuario]);
+    $permisos = $perm_sql->fetchAll(PDO::FETCH_COLUMN, 0);
+
+    foreach ($permisos as $perm) {
+        // En tu BD están con "/" inicial y con ".php" (p. ej. /admin/materias/index.php)
+        if ($perm === $restPrincipal || ($alt !== null && $perm === $alt)) {
+            $autorizado = true;
+            break;
+        }
+    }
+}
+
+/*  Redirigir si no está autorizado  */
 if (!$autorizado) {
     header('Location: ' . APP_URL . '/admin/no-autorizado.php'); exit;
 }
@@ -82,7 +99,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title><?=APP_NAME;?></title>
-    <link rel="stylesheet" href="<?=APP_URL;?>/public/css/custom.css">
+
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -107,7 +124,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
     <!-- CHART -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
+    <link rel="stylesheet" href="<?=APP_URL;?>/public/css/custom.css">
 </head>
 
 
