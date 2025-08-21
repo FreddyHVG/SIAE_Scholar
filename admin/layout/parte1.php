@@ -7,7 +7,7 @@ if (!isset($_SESSION['sesion_email'])) {
 
 $email_sesion = $_SESSION['sesion_email'];
 
-// Usuario + rol (LEFT JOIN para no romper si falta ficha en personas)
+// Usuario + rol (LEFT JOIN para no romper si no hay registro en personas)
 $query_sesion = $pdo->prepare("
     SELECT usu.id_usuario, usu.email, usu.rol_id, usu.estado,
            rol.nombre_rol,
@@ -30,17 +30,17 @@ $nombres_sesion_usuario   = $u['nombres'] ?? '';
 $apellidos_sesion_usuario = $u['apellidos'] ?? '';
 $ci_sesion_usuario        = $u['ci'] ?? '';
 
-// -------- Normaliza la ruta solicitada (SIN querystring, SIN index.php, SIN .php) --------
-$path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);          // ej: /siaescholar/admin/materias/editar.php
-$base = rtrim(dirname($_SERVER['SCRIPT_NAME']), '/\\') . '/';       // ej: /siaescholar/
-$rest = substr($path, strlen($base));                               // ej: admin/materias/editar.php
-$rest = ltrim($rest, '/');                                          // -> admin/materias/editar.php
-$rest = preg_replace('#/index\.php$#i', '', $rest);                 // quita /index.php al final
-$rest = preg_replace('#\.php$#i', '', $rest);                       // quita .php al final
-$rest = rtrim($rest, '/');                                          // quita / final
-if ($rest === '') { $rest = 'admin'; }                              // raíz → admin
+// ---- Normaliza la ruta solicitada: SIN querystring, SIN index.php, SIN .php ----
+$path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);          // /siaescholar/admin/materias/editar.php
+$base = rtrim(dirname($_SERVER['SCRIPT_NAME']), '/\\') . '/';       // /siaescholar/
+$rest = substr($path, strlen($base));                               // admin/materias/editar.php
+$rest = ltrim($rest, '/');                                          // admin/materias/editar.php
+$rest = preg_replace('#/index\.php$#i', '', $rest);                 // quita /index.php
+$rest = preg_replace('#\.php$#i', '', $rest);                       // quita .php
+$rest = rtrim($rest, '/');                                          // sin / final
+if ($rest === '') { $rest = 'admin'; }                              // raíz => admin
 
-// -------- Control de acceso: coincidencia EXACTA contra permisos del rol --------
+// ---- Control de acceso: coincidencia EXACTA contra permisos del rol ----
 $perm_sql = $pdo->prepare("
     SELECT per.url
     FROM roles_permisos AS rp
@@ -60,15 +60,13 @@ foreach ($permisos as $perm) {
     if ($rest === $p) { $autorizado = true; break; }
 }
 
-// Si quieres superusuario para ADMINISTRADOR, descomenta:
+// (Opcional: convertir ADMIN en superusuario) Descomenta para autorizar todo al rol 1:
 // if ($rol_sesion_usuario === 'ADMINISTRADOR' || $id_rol_sesion_usuario === 1) { $autorizado = true; }
 
 if (!$autorizado) {
     header('Location: ' . APP_URL . '/admin/no-autorizado.php'); exit;
 }
 ?>
-
-
 
 <!DOCTYPE html>
 <!--
