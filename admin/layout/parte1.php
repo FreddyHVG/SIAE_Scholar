@@ -133,6 +133,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <div class="wrapper">
     
         <header class="custom-header">
+            <video autoplay muted loop class="header-video">
+                <source src="<?=APP_URL;?>/public/videos/header-bg.mp4" type="video/mp4">
+            </video>
+            <div class="overlay"></div>
             <div class="container header-content">
                 <!-- Sección de logo y título -->
                 <div class="header-left">
